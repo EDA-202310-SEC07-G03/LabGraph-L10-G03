@@ -192,7 +192,7 @@ def initSearch(graph, source):
 
         search['visited'] = map.newMap(numelements=g.numVertices(graph),
                                        maptype='PROBING',
-                                       comparefunction=graph['comparefunction']
+                                       cmpfunction=graph['comparefunction']
                                        )
         vertices = g.vertices(graph)
         for vert in lt.iterator(vertices):

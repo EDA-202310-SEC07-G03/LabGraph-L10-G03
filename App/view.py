@@ -31,7 +31,8 @@ import threading
 from App import controller
 from DISClib.ADT import stack
 assert config
-
+default_limit = 1000
+sys.setrecursionlimit(default_limit*10000)
 """
 La vista se encarga de la interacción con el usuario.
 Presenta el menu de opciones  y  por cada seleccion
@@ -67,9 +68,9 @@ def printMenu():
     print("*******************************************")
 
 
-def optionTwo(cont):
+def optionTwo(cont, servicefile, memflag):
     print("\nCargando información de transporte de singapur ....")
-    controller.loadServices(cont, servicefile)
+    controller.loadServices(cont, servicefile, memflag)
     numedges = controller.totalConnections(cont)
     numvertex = controller.totalStops(cont)
     print('Numero de vertices: ' + str(numvertex))
@@ -83,7 +84,12 @@ def optionThree(cont):
 
 
 def optionFour(cont, initialStation):
-    controller.minimumCostPaths(cont, initialStation)
+    cont=controller.minimumCostPaths(cont, initialStation)
+    numedges = controller.totalConnections(cont)
+    numvertex = controller.totalStops(cont)
+    print('Numero de vertices: ' + str(numvertex))
+    print('Numero de arcos: ' + str(numedges))
+    print('El limite de recursion actual: ' + str(sys.getrecursionlimit()))
 
 
 def optionFive(cont, destStation):
@@ -103,6 +109,12 @@ def optionSix(cont, destStation):
             print(stop)
     else:
         print('No hay camino')
+    
+    numedges = controller.totalConnections(cont)
+    numvertex = controller.totalStops(cont)
+    print('Numero de vertices: ' + str(numvertex))
+    print('Numero de arcos: ' + str(numedges))
+    print('El limite de recursion actual: ' + str(sys.getrecursionlimit()))
 
 
 def optionSeven(cont):
@@ -127,7 +139,18 @@ def thread_cycle():
             cont = controller.init()
 
         elif int(inputs[0]) == 2:
-            optionTwo(cont)
+            
+            #optionTwo(cont)
+            print("1 - 50")
+            print("2 - 300")
+            print("3 - 1000")
+            print("4 - 2000")
+            print("5 - 3000")
+            print("6 - 7000")
+            print("7 - 10000")
+            print("8 - 14000")
+            filename = int(input("Escoja el tamaño de la muestra:"))
+            optionTwo(cont, filename, True)
 
         elif int(inputs[0]) == 3:
             optionThree(cont)

@@ -63,11 +63,11 @@ def newGraph(size, cmpfunction, directed, type, datastructure):
                  }
         graph['vertices'] = map.newMap(numelements=size,
                                        maptype='PROBING',
-                                       comparefunction=cmpfunction)
+                                       cmpfunction=cmpfunction)
         if (directed):
             graph['indegree'] = map.newMap(numelements=size,
                                            maptype='PROBING',
-                                           comparefunction=cmpfunction)
+                                           cmpfunction=cmpfunction)
         return graph
     except Exception as exp:
         error.reraise(exp, 'ajlist:newgraph')

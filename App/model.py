@@ -30,6 +30,7 @@ from DISClib.ADT import list as lt
 from DISClib.Algorithms.Graphs import scc
 from DISClib.Algorithms.Graphs import dijsktra as djk
 from DISClib.Utils import error as error
+
 assert config
 
 """
@@ -61,13 +62,14 @@ def newAnalyzer():
 
         analyzer['stops'] = m.newMap(numelements=14000,
                                      maptype='PROBING',
-                                     comparefunction=compareStopIds)
+                                     cmpfunction=compareStopIds)#compareStopIds
 
         analyzer['connections'] = gr.newGraph(datastructure='ADJ_LIST',
                                               directed=True,
                                               size=14000,
-                                              comparefunction=compareStopIds)
+                                              comparefunction=compareStopIds)#compareStopIds
         return analyzer
+    
     except Exception as exp:
         error.reraise(exp, 'model:newAnalyzer')
 
